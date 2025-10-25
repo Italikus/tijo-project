@@ -1,9 +1,13 @@
 package com.example.tijo.backend.service;
 
 import com.example.tijo.backend.model.Car;
+import com.example.tijo.backend.model.dto.CarDto;
 import com.example.tijo.backend.repository.CarRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -13,6 +17,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CarService {
     private final CarRepository carRepository;
+
+    @Transactional(readOnly = true)
+    public Page<CarDto> findAll(Pageable pageable) {
+        return carRepository.findAll(pageable).map(CarDto::toDto);
+    }
 
     public List<Car> findCarsByYearLessThan(List<Car> cars, int year) {
         if (cars == null || cars.isEmpty()) {
