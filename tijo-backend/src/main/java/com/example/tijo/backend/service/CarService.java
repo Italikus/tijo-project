@@ -14,6 +14,26 @@ import java.util.stream.Collectors;
 public class CarService {
     private final CarRepository carRepository;
 
+    public List<Car> findCarsByYearLessThan(List<Car> cars, int year) {
+        if (cars == null || cars.isEmpty()) {
+            return List.of();
+        }
+
+        return cars.stream()
+                .filter(c -> c.getYear() < year)
+                .toList();
+    }
+
+    public List<Car> findCarsByYearGreaterThan(List<Car> cars, int year) {
+        if (cars == null || cars.isEmpty()) {
+            return List.of();
+        }
+
+        return cars.stream()
+                .filter(c -> c.getYear() > year)
+                .toList();
+    }
+
     public List<Car> findCarsByBrand(List<Car> cars, String brand) {
         if (cars == null || cars.isEmpty()) {
             return List.of();
