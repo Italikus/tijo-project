@@ -20,6 +20,10 @@ public class Car {
     private int horsePower;
     private int year;
 
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private Owner owner;
+
     public Car(String brand, String model, String vin, int horsePower, int year) {
         this.brand = brand;
         this.model = model;
