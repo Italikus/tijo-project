@@ -1,6 +1,6 @@
 package com.example.tijo.backend.controller;
 
-import com.example.tijo.backend.model.CreateCarCommand;
+import com.example.tijo.backend.model.command.CreateCarCommand;
 import com.example.tijo.backend.model.command.EditCarCommand;
 import com.example.tijo.backend.model.dto.CarDto;
 import com.example.tijo.backend.service.CarService;

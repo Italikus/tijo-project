@@ -1,7 +1,7 @@
 package com.example.tijo.backend.service;
 
 import com.example.tijo.backend.model.Car;
-import com.example.tijo.backend.model.CreateCarCommand;
+import com.example.tijo.backend.model.command.CreateCarCommand;
 import com.example.tijo.backend.model.Owner;
 import com.example.tijo.backend.model.command.EditCarCommand;
 import com.example.tijo.backend.model.dto.CarDto;

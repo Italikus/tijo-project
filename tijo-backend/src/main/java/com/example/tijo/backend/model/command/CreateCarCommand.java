@@ -1,4 +1,4 @@
-package com.example.tijo.backend.model;
+package com.example.tijo.backend.model.command;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
