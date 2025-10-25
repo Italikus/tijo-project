@@ -14,6 +14,16 @@ import java.util.stream.Collectors;
 public class CarService {
     private final CarRepository carRepository;
 
+    public List<Car> findCarsByBrand(List<Car> cars, String brand) {
+        if (cars == null || cars.isEmpty()) {
+            return List.of();
+        }
+
+        return cars.stream()
+                .filter(c -> c.getBrand().equals(brand))
+                .toList();
+    }
+
     public Map<String, List<Car>> classifyCarsByHorsePower(List<Car> cars) {
         if (cars == null || cars.isEmpty()) {
             return Map.of();
