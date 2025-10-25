@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -21,7 +23,7 @@ public class Owner {
     private String pesel;
 
     @OneToMany(mappedBy = "owner")
-    private List<Car> cars = new ArrayList<>();
+    private Set<Car> cars = new HashSet<>();
 
     public Owner(String name, String surname, String pesel) {
         this.name = name;
