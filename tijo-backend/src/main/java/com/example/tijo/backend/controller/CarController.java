@@ -4,6 +4,7 @@ import com.example.tijo.backend.model.CreateCarCommand;
 import com.example.tijo.backend.model.command.EditCarCommand;
 import com.example.tijo.backend.model.dto.CarDto;
 import com.example.tijo.backend.service.CarService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,7 +31,7 @@ public class CarController {
     }
 
     @PostMapping
-    public ResponseEntity<CarDto> addCar(@RequestBody CreateCarCommand command) {
+    public ResponseEntity<CarDto> addCar(@Valid @RequestBody CreateCarCommand command) {
         return ResponseEntity.status(HttpStatus.CREATED).body(carService.saveCar(command));
     }
 
