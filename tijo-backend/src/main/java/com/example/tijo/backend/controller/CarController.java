@@ -6,9 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/cars")
@@ -17,7 +17,13 @@ public class CarController {
     private final CarService carService;
 
     @GetMapping
-    public Page<CarDto> findAllCars(@PageableDefault Pageable pageable) {
-        return carService.findAll(pageable);
+    public ResponseEntity<Page<CarDto>> findAllCars(@PageableDefault Pageable pageable) {
+        return ResponseEntity.ok(carService.findAll(pageable));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCar(@PathVariable int id) {
+        carService.deleteById(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

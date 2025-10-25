@@ -23,6 +23,11 @@ public class CarService {
         return carRepository.findAll(pageable).map(CarDto::toDto);
     }
 
+    @Transactional
+    public void deleteById(int id) {
+        carRepository.deleteById(id);
+    }
+
     public List<Car> findCarsByYearLessThan(List<Car> cars, int year) {
         if (cars == null || cars.isEmpty()) {
             return List.of();
