@@ -20,17 +20,17 @@ public class Car {
     @Column(unique = true, nullable = false, updatable = false)
     private String vin;
     private int horsePower;
-    private int year;
+    private int productionYear;
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private Owner owner;
 
-    public Car(String brand, String model, String vin, int horsePower, int year) {
+    public Car(String brand, String model, String vin, int horsePower, int productionYear) {
         this.brand = brand;
         this.model = model;
         this.vin = vin;
         this.horsePower = horsePower;
-        this.year = year;
+        this.productionYear = productionYear;
     }
 }

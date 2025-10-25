@@ -29,7 +29,7 @@ public class CarService {
         }
 
         return cars.stream()
-                .filter(c -> c.getYear() < year)
+                .filter(c -> c.getProductionYear() < year)
                 .toList();
     }
 
@@ -39,7 +39,7 @@ public class CarService {
         }
 
         return cars.stream()
-                .filter(c -> c.getYear() > year)
+                .filter(c -> c.getProductionYear() > year)
                 .toList();
     }
 

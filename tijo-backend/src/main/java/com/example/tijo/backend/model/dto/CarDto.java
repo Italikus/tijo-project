@@ -9,7 +9,7 @@ public record CarDto(int id, String brand, String model, int horsePower, int yea
                 car.getBrand(),
                 car.getModel(),
                 car.getHorsePower(),
-                car.getYear()
+                car.getProductionYear()
         );
     }
 }
