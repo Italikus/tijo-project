@@ -1,6 +1,7 @@
 package com.example.tijo.backend.service;
 
 import com.example.tijo.backend.model.Car;
+import com.example.tijo.backend.model.CreateCarCommand;
 import com.example.tijo.backend.model.dto.CarDto;
 import com.example.tijo.backend.repository.CarRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,18 @@ public class CarService {
     @Transactional
     public void deleteById(int id) {
         carRepository.deleteById(id);
+    }
+
+    @Transactional
+    public CarDto saveCar(CreateCarCommand command) {
+        Car car = new Car(
+                command.getBrand(),
+                command.getModel(),
+                command.getVin(),
+                command.getHorsePower(),
+                command.getProductionYear()
+        );
+        return CarDto.toDto(carRepository.saveAndFlush(car));
     }
 
     public List<Car> findCarsByYearLessThan(List<Car> cars, int year) {
