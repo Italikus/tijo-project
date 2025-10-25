@@ -1,6 +1,7 @@
 package com.example.tijo.backend.controller;
 
 import com.example.tijo.backend.model.CreateCarCommand;
+import com.example.tijo.backend.model.command.EditCarCommand;
 import com.example.tijo.backend.model.dto.CarDto;
 import com.example.tijo.backend.service.CarService;
 import lombok.RequiredArgsConstructor;
@@ -31,5 +32,13 @@ public class CarController {
     @PostMapping
     public ResponseEntity<CarDto> addCar(@RequestBody CreateCarCommand command) {
         return ResponseEntity.status(HttpStatus.CREATED).body(carService.saveCar(command));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CarDto> addCar(@PathVariable int id, @RequestBody EditCarCommand command) {
+        if (id != command.getId()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(carService.editCar(command));
     }
 }

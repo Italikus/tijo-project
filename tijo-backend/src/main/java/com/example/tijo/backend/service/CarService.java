@@ -2,8 +2,12 @@ package com.example.tijo.backend.service;
 
 import com.example.tijo.backend.model.Car;
 import com.example.tijo.backend.model.CreateCarCommand;
+import com.example.tijo.backend.model.Owner;
+import com.example.tijo.backend.model.command.EditCarCommand;
 import com.example.tijo.backend.model.dto.CarDto;
 import com.example.tijo.backend.repository.CarRepository;
+import com.example.tijo.backend.repository.OwnerRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +22,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CarService {
     private final CarRepository carRepository;
+    private final OwnerRepository ownerRepository;
 
     @Transactional(readOnly = true)
     public Page<CarDto> findAll(Pageable pageable) {
@@ -38,6 +43,19 @@ public class CarService {
                 command.getHorsePower(),
                 command.getProductionYear()
         );
+        return CarDto.toDto(carRepository.saveAndFlush(car));
+    }
+
+    @Transactional
+    public CarDto editCar(EditCarCommand command) {
+        Car car = carRepository.findById(command.getId()).orElseThrow(EntityNotFoundException::new);
+        car.setHorsePower(command.getHorsePower());
+
+        if (command.getOwnerId() != null) {
+            Owner owner = ownerRepository.findById(command.getOwnerId()).orElseThrow(EntityNotFoundException::new);
+            car.setOwner(owner);
+        }
+
         return CarDto.toDto(carRepository.saveAndFlush(car));
     }
 
