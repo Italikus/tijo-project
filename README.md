@@ -4,7 +4,7 @@
 Bartłomiej Podlewski
 
 ## Temat projektu
-Test serwera API
+Aplikacja do zarzadzania pojazdami i ich właścicielami
 ## Opis projektu
 Projekt składa się z dwóch modułów:
 - Backend (`tijo-backend`): Aplikacja Spring Boot (Java 21) udostępniająca REST API do zarządzania encjami `Car` oraz `Owner`. Wykorzystuje wbudowaną bazę H2 dla uproszczenia uruchomienia, walidację (Bean Validation) oraz prosty mechanizm obsługi błędów. Zastosowano Lombok do redukcji kodu boilerplate. Dostępne są kontrolery `CarController` i `OwnerController`, serwisy oraz repozytoria JPA.
