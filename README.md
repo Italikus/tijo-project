@@ -4,7 +4,7 @@
 Bartłomiej Podlewski
 
 ## Temat projektu
-Test serwera API
+Aplikacja do zarzadzania pojazdami i ich właścicielami
 ## Opis projektu
 Projekt składa się z dwóch modułów:
 - Backend (`tijo-backend`): Aplikacja Spring Boot (Java 21) udostępniająca REST API do zarządzania encjami `Car` oraz `Owner`. Wykorzystuje wbudowaną bazę H2 dla uproszczenia uruchomienia, walidację (Bean Validation) oraz prosty mechanizm obsługi błędów. Zastosowano Lombok do redukcji kodu boilerplate. Dostępne są kontrolery `CarController` i `OwnerController`, serwisy oraz repozytoria JPA.
@@ -56,6 +56,43 @@ npm start
 
 Upewnij się, że backend działa równolegle (port 8080), aby frontend mógł pobierać dane.
 
+## Dokumentacja API
+
+Projekt backend wykorzystuje SpringDoc OpenAPI (Swagger) do automatycznej dokumentacji REST API.
+
+### Dostęp do dokumentacji
+
+Po uruchomieniu backendu dokumentacja API jest dostępna pod następującymi adresami:
+
+1. **Swagger UI** (interaktywna dokumentacja):
+   ```
+   http://localhost:8080/swagger-ui.html
+   ```
+   Swagger UI umożliwia przeglądanie wszystkich endpointów, ich parametrów, oraz testowanie API bezpośrednio z przeglądarki.
+
+2. **OpenAPI JSON** (specyfikacja w formacie JSON):
+   ```
+   http://localhost:8080/api-docs
+   ```
+   Możesz użyć tego URL do importu API do narzędzi takich jak Postman, Insomnia czy innych klientów REST API.
+
+### Zawartość dokumentacji
+
+Dokumentacja zawiera szczegółowe informacje o wszystkich endpointach:
+
+#### Cars API (`/api/v1/cars`)
+- `GET /api/v1/cars` - Pobranie listy pojazdów (z paginacją)
+- `POST /api/v1/cars` - Dodanie nowego pojazdu (wymagana walidacja VIN)
+- `PUT /api/v1/cars/{id}` - Edycja pojazdu
+- `DELETE /api/v1/cars/{id}` - Usunięcie pojazdu
+
+#### Owners API (`/api/v1/owners`)
+- `GET /api/v1/owners` - Pobranie listy właścicieli (z paginacją)
+- `POST /api/v1/owners` - Dodanie nowego właściciela (wymagana walidacja PESEL)
+- `DELETE /api/v1/owners/{id}` - Usunięcie właściciela
+- `POST /api/v1/owners/{id}/cars/{carId}` - Przypisanie pojazdu do właściciela
+
+
 ## Technologie użyte w projekcie
 ### Backend
 - Java 21
@@ -63,6 +100,7 @@ Upewnij się, że backend działa równolegle (port 8080), aby frontend mógł p
   - spring-boot-starter-web
   - spring-boot-starter-data-jpa
   - spring-boot-starter-validation
+- SpringDoc OpenAPI 2.8.4 (Swagger UI)
 - H2 Database (tryb runtime)
 - Lombok
 - Maven Wrapper
