@@ -56,6 +56,24 @@ npm start
 
 Upewnij się, że backend działa równolegle (port 8080), aby frontend mógł pobierać dane.
 
+## Testy (Opis testów jednostkowych, integracyjnych z odnośnikami do lokalizacji w projekcie)
+
+Poniżej znajduje się krótkie podsumowanie rodzajów testów znajdujących się w module backend (`tijo-backend`) oraz lista plików testowych z odnośnikami do lokalizacji w projekcie.
+
+### Opis
+- Testy jednostkowe: testują pojedyncze klasy i metody w izolacji, często z użyciem mocków (Mockito).
+- Testy integracyjne: uruchamiają część kontekstu Springa (np. całą aplikację lub warstwę web) aby przetestować współdziałanie komponentów.
+
+### Testy jednostkowe (backend)
+- [CarServiceTest.java](tijo-backend/src/test/java/com/example/tijo/backend/service/CarServiceTest.java) — testy jednostkowe serwisu `CarService` korzystające z Mockito (`@ExtendWith(MockitoExtension.class)`) (logika filtrowania, klasyfikacji, CRUD z mockowanym repozytorium).
+- [OwnerDtoTest.java](tijo-backend/src/test/java/com/example/tijo/backend/model/dto/OwnerDtoTest.java) — testy mapowania encji `Owner` na DTO (`OwnerDto`).
+- [PeselValidatorTest.java](tijo-backend/src/test/java/com/example/tijo/backend/validation/PeselValidatorTest.java) — testy walidatora numeru PESEL (różne przypadki poprawne/niepoprawne).
+
+### Testy integracyjne (backend)
+- [TijoBackendApplicationTests.java](tijo-backend/src/test/java/com/example/tijo/backend/TijoBackendApplicationTests.java) — test kontekstowy aplikacji (`@SpringBootTest`) sprawdzający, czy kontekst Spring ładuje się poprawnie.
+- [CarControllerTest.java](tijo-backend/src/test/java/com/example/tijo/backend/controller/CarControllerTest.java) — testy warstwy web dla kontrolera `CarController` używające `@WebMvcTest` oraz `MockMvc` (testy endpointów GET/POST/PUT/DELETE z mockowanym serwisem).
+- [OwnerControllerTest.java](tijo-backend/src/test/java/com/example/tijo/backend/controller/OwnerControllerTest.java) — testy warstwy web dla kontrolera `OwnerController` używające `@WebMvcTest` oraz `MockMvc` (sprawdzanie obsługi endpointów właścicieli, walidacji i przypisywania samochodów).
+
 ## Dokumentacja API
 
 Projekt backend wykorzystuje SpringDoc OpenAPI (Swagger) do automatycznej dokumentacji REST API.
